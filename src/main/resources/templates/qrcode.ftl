@@ -1,9 +1,9 @@
-%rebase('base')
+<@override name = "body">
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
 				<div class="text-center">
-					<img src="../static/qrcode/{{img}}.png" class="center-block" />
+					<img src="qrcode/{{img}}.png" class="center-block" />
 				</div>
 
 			<div class="jumbotron text-center">
@@ -20,3 +20,5 @@
 		</div>
 	</div>
 </div>
+</@override>
+<@extends name="base.ftl"/>
