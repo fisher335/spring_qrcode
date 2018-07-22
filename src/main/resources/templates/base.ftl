@@ -32,12 +32,12 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/qrcode/">二维码</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/list/">请求头</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/wiki/">wiki</a>
-                        </li>
+                        <#--<li class="nav-item">-->
+                            <#--<a class="nav-link" href="/list/">请求头</a>-->
+                        <#--</li>-->
+                        <#--<li class="nav-item">-->
+                            <#--<a class="nav-link" href="/wiki/">wiki</a>-->
+                        <#--</li>-->
                         <li class="nav-item">
                             <a class="nav-link" href="/upload/">上传文件</a>
                         </li>
