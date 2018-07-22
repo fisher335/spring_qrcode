@@ -1,7 +1,6 @@
 <@override name="body">
 <div class="container-fluid">
 
-    <div class="col-md-12">
         <form role="form" action="/qrcode/" method="post">
             <div class="form-group">
 
@@ -24,7 +23,6 @@
                 </button>
             </div>
         </form>
-    </div>
 </div>
 </@override>
 <@extends name="base.ftl"/>

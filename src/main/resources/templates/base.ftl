@@ -13,44 +13,42 @@
 <body>
 <div class="container-fluid">
 
-    <div class="col-md-12">
-        <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-            <!-- Brand -->
-            <a class="navbar-brand" href="#">网盘测试</a>
+    <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">网盘测试</a>
 
-            <!-- Toggler/collapsibe Button -->
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <!-- Navbar links -->
-            <div class="collapse navbar-collapse" id="collapsibleNavbar">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/index/">首页</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/qrcode/">二维码</a>
-                    </li>
-                <#--<li class="nav-item">-->
-                <#--<a class="nav-link" href="/list/">请求头</a>-->
-                <#--</li>-->
-                <#--<li class="nav-item">-->
-                <#--<a class="nav-link" href="/wiki/">wiki</a>-->
-                <#--</li>-->
-                    <li class="nav-item">
-                        <a class="nav-link" href="/upload/">上传文件</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/file/">文件列表</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
-    <div class="panel-body">
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/index/">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/qrcode/">二维码</a>
+                </li>
+            <#--<li class="nav-item">-->
+            <#--<a class="nav-link" href="/list/">请求头</a>-->
+            <#--</li>-->
+            <#--<li class="nav-item">-->
+            <#--<a class="nav-link" href="/wiki/">wiki</a>-->
+            <#--</li>-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/upload/">上传文件</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/file/">文件列表</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div class="panel-body">
          <@block name="body">base_body_content</@block>
-    </div>
 </div>
 
 

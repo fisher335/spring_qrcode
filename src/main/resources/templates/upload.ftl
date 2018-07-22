@@ -1,5 +1,5 @@
 <@override name = "body">
-
+<div class="container-fluid">
     <form class="form-horizontal col-sm-10" role="form" action="" method="post" id ="info"  enctype="multipart/form-data">
         <div class="form-group">
             <label for="file" class="col-sm-3 align-left control-label">上传文件,暂只接受MP4文件</label>
@@ -15,7 +15,7 @@
         </div>
 
     </form>
-
+</div>
 
 <script language="JavaScript" type="text/javascript"  >
 
