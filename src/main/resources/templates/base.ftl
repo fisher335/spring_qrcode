@@ -4,10 +4,10 @@
     <title>欢迎你</title>
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="css/bootstrap.min.css" rel='stylesheet' type="text/css">
-    <script type="text/javascript" src="js/jquery.slim.min.js"></script>
-    <script type="text/javascript" src="popper.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel='stylesheet' type="text/css">
+    <script type="text/javascript" src="/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/js/popper.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 
 </head>
 <body>

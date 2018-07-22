@@ -1,5 +1,4 @@
-%rebase('base')
-
+<@override name = "body">
 <table class="table table-bordered" align="center" sortable = "true" >
 	<caption>视频文件</caption>
 
@@ -11,16 +10,17 @@
       </tr>
    </thead>
    <tbody>
-   %for index,value in enumerate(files):
+   <#list file as item>
 
           <tr>
-              <td>{{index+1}}</td>
-              <td>{{value}}</td>
-             <td><a href="/static/videos/{{value}}" target="_blank">播放</a></td>
+              <td>${item_index+1}</td>
+              <td>${item}</td>
+             <td><a href="/upload/${item}" target="_blank">播放</a></td>
           </tr>
 
 
-   %end
+   </#list>
    </tbody>
 </table>
-
+</@override>
+<@extends name="base.ftl"/>

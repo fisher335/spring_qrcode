@@ -1,16 +1,16 @@
 package com.learn.controller;
-
-
+import com.learn.util.FileUpload;
 import com.learn.util.Qrcode;
-import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.logging.Logger;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 
 /**
  * Created by fengshaomin on 2018/7/20 0020.
@@ -19,12 +19,21 @@ import java.util.logging.Logger;
 @Controller
 @RequestMapping(value = "/")
 public class MainController {
+    @Autowired
+    private Qrcode qrcode;
+    @Autowired
+    private FileUpload fileupload;
+
+
     @RequestMapping(value = "/")
     public String hello() {
-
         return "index";
     }
 
+    @RequestMapping(value = "/qrcode")
+    public String Qrcode(){
+        return "index";
+    }
     @RequestMapping(value = "/index")
     public String index() {
         return "index";
@@ -35,9 +44,37 @@ public class MainController {
 
         String url = request.getParameter("url");
         System.out.println(url);
-        Qrcode.create_qrcode(url);
+        String fire_name = qrcode.create_qrcode(url);
 
-        map.addAttribute("img","1111");
+        map.addAttribute("file", fire_name);
         return "qrcode";
     }
+
+    @RequestMapping(value = "/download/{file_name}")
+    public void download_img(@PathVariable String file_name, HttpServletResponse res) throws UnsupportedEncodingException {
+        System.out.println(file_name);
+        qrcode.download(res, file_name);
+    }
+
+    @GetMapping(value = "/upload")
+    public String upload_file_get() {
+        return "upload";
+    }
+    @PostMapping(value = "/upload")
+    public String upload_file_post(@RequestParam(value = "file") MultipartFile file) throws IOException {
+
+        String file_name = file.getOriginalFilename();
+        System.out.println(file_name);
+        fileupload.save_upload_file(file.getBytes(),file_name);
+        return  "redirect:/file";
+    }
+
+    @RequestMapping(value = "/file")
+    public String list_file(Model map){
+
+        List<String> result = fileupload.get_filelist(false);
+        map.addAttribute("file",result);
+        return  "file";
+    }
+
 }

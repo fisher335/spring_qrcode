@@ -3,7 +3,7 @@
 	<div class="row">
 		<div class="col-md-12">
 				<div class="text-center">
-					<img src="qrcode/{{img}}.png" class="center-block" />
+					<img src="/qrcode/${file}" class="center-block" />
 				</div>
 
 			<div class="jumbotron text-center">
@@ -14,7 +14,7 @@
 					生成二维码如图，请右键保存，我就不加按钮了。
 				</p>
 				<p>
-					<a class="btn btn-primary btn-large" href="/download/{{img}}.png">下载图片</a>
+					<a class="btn btn-primary btn-large" href="/download/${file}">下载图片</a>
 				</p>
 			</div>
 		</div>
