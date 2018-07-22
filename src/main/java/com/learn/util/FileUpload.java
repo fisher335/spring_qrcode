@@ -8,6 +8,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 @Component
 public class FileUpload {
@@ -43,4 +46,14 @@ public class FileUpload {
         }
         return list;
     }
+
+    // 过滤特殊字符 p
+// 只允许字母和数字 // String regEx ="[^a-zA-Z0-9]";
+// 清除掉所有特殊字符
+    public static String StringFilter(String str) throws PatternSyntaxException {
+        String regEx="[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
+    Pattern p = Pattern.compile(regEx);
+    Matcher m = p.matcher(str);
+    return m.replaceAll("").trim();
+}
 }

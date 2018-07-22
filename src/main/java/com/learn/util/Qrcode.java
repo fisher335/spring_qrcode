@@ -27,13 +27,7 @@ public class Qrcode {
 
 
     public String create_qrcode(String text) throws IOException {
-        text = text.replace("http://", "");
-        text = text.replace("https://", "");
-        text = text.replace("*", "");
-        text = text.replace("#", "");
-        text = text.replace(".", "");
-        text = text.replace("!", "");
-        System.out.println(upload_path);
+        String file_name = FileUpload.StringFilter(text);
         int width = 300;
         int height = 300;
         String format = "png";
@@ -43,7 +37,7 @@ public class Qrcode {
         hints.put(EncodeHintType.MARGIN, 2);
         try {
             BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, width, height, hints);
-            String file_name = text + ".png";
+            file_name = file_name + ".png";
             String file_path = upload_path + File.separator+"qrcode"+File.separator+ file_name;
             Path file = new File(file_path).toPath();
             MatrixToImageWriter.writeToPath(bitMatrix, format, file);
