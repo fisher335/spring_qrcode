@@ -32,13 +32,14 @@ public class Qrcode {
         int height = 300;
         String format = "png";
         Hashtable hints = new Hashtable();
-        hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+        hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);
         hints.put(EncodeHintType.MARGIN, 2);
         try {
             BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, width, height, hints);
             file_name = file_name + ".png";
             String file_path = upload_path + File.separator+"qrcode"+File.separator+ file_name;
+
             Path file = new File(file_path).toPath();
             MatrixToImageWriter.writeToPath(bitMatrix, format, file);
             return file_name;
