@@ -27,7 +27,7 @@ public class Qrcode {
 
 
     public String create_qrcode(String text) throws IOException {
-        String file_name = FileUpload.StringFilter(text);
+        String file_name = String.valueOf(Math.random()*1000000);
         int width = 300;
         int height = 300;
         String format = "png";
