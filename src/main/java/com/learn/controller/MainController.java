@@ -2,7 +2,10 @@ package com.learn.controller;
 
 import com.learn.util.FileUpload;
 import com.learn.util.Qrcode;
+import org.apache.cxf.message.StringMapImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
+import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * Created by fengshaomin on 2018/7/20 0020.
@@ -26,9 +30,15 @@ public class MainController {
     @Autowired
     private FileUpload fileupload;
 
+    private Logger logger = Logger.getLogger(getClass().toString());
 
     @RequestMapping(value = "/")
     public String hello() {
+        return "index";
+    }
+
+    @RequestMapping(value = "/index")
+    public String index() {
         return "index";
     }
 
@@ -37,10 +47,6 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping(value = "/index")
-    public String index() {
-        return "index";
-    }
 
     @RequestMapping(value = "/qrcode", method = RequestMethod.POST)
     public String qrcode(Model map, HttpServletRequest request) throws IOException {
@@ -69,7 +75,7 @@ public class MainController {
         String file_name = file.getOriginalFilename();
         System.out.println(file_name);
         fileupload.save_upload_file(file.getBytes(), file_name);
-        return "redirect:https://www.fengshaomin.com/file";
+        return "redirect:/file";
     }
 
     @RequestMapping(value = "/file")
@@ -82,11 +88,24 @@ public class MainController {
 
     @RequestMapping(value = "/zhuang")
     public String zhuang(Model map) {
-
         map.addAttribute("name", "冯文韬");
         map.addAttribute("tel", "15110202919");
         map.addAttribute("addr", "海淀区厢黄旗东路柳浪家园南里26号楼1单元701");
         return "zhuang";
+    }
+
+    @RequestMapping(value = "/list")
+    public String list_header(HttpServletRequest request , Model map){
+        Enumeration l = request.getHeaderNames();
+        Map map_tmp = new HashMap<String,String>();
+        for (Enumeration e= l;e.hasMoreElements();) {
+            String name = e.nextElement().toString();
+            String val = request.getHeader(name);
+            map_tmp.put(name, val);
+        }
+        map.addAttribute("headers",map_tmp);
+        return "list";
+
     }
 
 }

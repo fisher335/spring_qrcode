@@ -1,4 +1,4 @@
-%rebase('base')
+<@override name = "body">
     <table class="table table-bordered table-striped table-responsive" align="center" sortable = "true" >
 	<caption>信息查询</caption>
 
@@ -9,12 +9,15 @@
       </tr>
    </thead>
    <tbody>
-     %for k,v in session.items():
+     <#list headers?keys as key>
 <tr>
 
-<td>{{ k }}</td>
-<td>{{ v }}</td>
+<td>${key}</td>
+<td>${headers["${key}"]}</td>
    </tr>
-   % end
+</#list>
    </tbody>
+
 </table>
+</@override>
+<@extends name="base.ftl"/>

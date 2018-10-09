@@ -22,8 +22,8 @@ import java.util.Hashtable;
 @Component
 public class Qrcode {
 
-    @Value("${web.upload-path}")
-    private String upload_path;
+    @Value("${web.qrcode-path}")
+    private String qrcode_path;
 
 
     public String create_qrcode(String text) throws IOException {
@@ -38,7 +38,7 @@ public class Qrcode {
         try {
             BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, width, height, hints);
             file_name = file_name + ".png";
-            String file_path = upload_path + File.separator+"qrcode"+File.separator+ file_name;
+            String file_path = qrcode_path +File.separator+ file_name;
 
             Path file = new File(file_path).toPath();
             MatrixToImageWriter.writeToPath(bitMatrix, format, file);
@@ -61,7 +61,7 @@ public class Qrcode {
         OutputStream os = null;
         try {
             os = res.getOutputStream();
-            bis = new BufferedInputStream(new FileInputStream(new File(upload_path +File.separator+"qrcode"+File.separator+ file_name
+            bis = new BufferedInputStream(new FileInputStream(new File( qrcode_path+File.separator+ file_name
             )));
             int i = bis.read(buff);
             while (i != -1) {

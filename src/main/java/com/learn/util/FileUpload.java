@@ -19,7 +19,7 @@ public class FileUpload {
 
     public void save_upload_file(byte[] file, String file_name) throws IOException {
 
-        FileOutputStream out = new FileOutputStream(upload_path + File.separator + "upload" + File.separator + file_name);
+        FileOutputStream out = new FileOutputStream(upload_path +  File.separator + file_name);
         out.write(file);
         out.flush();
         out.close();
@@ -27,7 +27,7 @@ public class FileUpload {
 
     public List<String> get_filelist(boolean isAddDirectory) {
 
-        String directoryPath = upload_path+ File.separator+"upload";
+        String directoryPath = upload_path;
         List<String> list = new ArrayList<String>();
         File baseFile = new File(directoryPath);
         if (baseFile.isFile() || !baseFile.exists()) {
