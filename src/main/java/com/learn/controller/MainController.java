@@ -2,10 +2,7 @@ package com.learn.controller;
 
 import com.learn.util.FileUpload;
 import com.learn.util.Qrcode;
-import org.apache.cxf.message.StringMapImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,9 +10,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -73,8 +74,10 @@ public class MainController {
     public String upload_file_post(@RequestParam(value = "file") MultipartFile file) throws IOException {
 
         String file_name = file.getOriginalFilename();
-        System.out.println(file_name);
-        fileupload.save_upload_file(file.getBytes(), file_name);
+        File tmp_file = new File(file_name);
+        String real_name = tmp_file.getName();
+        logger.info("upload file -----------------------"+real_name);
+        fileupload.save_upload_file(file.getBytes(), real_name);
         return "redirect:/file";
     }
 
@@ -95,15 +98,15 @@ public class MainController {
     }
 
     @RequestMapping(value = "/list")
-    public String list_header(HttpServletRequest request , Model map){
+    public String list_header(HttpServletRequest request, Model map) {
         Enumeration l = request.getHeaderNames();
-        Map map_tmp = new HashMap<String,String>();
-        for (Enumeration e= l;e.hasMoreElements();) {
+        Map map_tmp = new HashMap<String, String>();
+        for (Enumeration e = l; e.hasMoreElements(); ) {
             String name = e.nextElement().toString();
             String val = request.getHeader(name);
             map_tmp.put(name, val);
         }
-        map.addAttribute("headers",map_tmp);
+        map.addAttribute("headers", map_tmp);
         return "list";
 
     }

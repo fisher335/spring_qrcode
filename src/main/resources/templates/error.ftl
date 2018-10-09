@@ -15,7 +15,7 @@
    <tr>
        <td>1</td>
        <td>${code}</td>
-       <td>${msg}></td>
+       <td>${msg}</td>
        <td>error</td>
    </tr>
 
