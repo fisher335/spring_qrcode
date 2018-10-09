@@ -11,7 +11,7 @@
     </tr>
     </thead>
     <tbody>
-   <#list file as  >
+   <#list file as item>
 
    <tr>
        <td>${item_index+1}</td>
