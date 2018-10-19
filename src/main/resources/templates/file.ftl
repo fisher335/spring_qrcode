@@ -16,7 +16,7 @@
    <tr>
        <td>${item_index+1}</td>
        <td>${item}</td>
-       <td><a href="/${item}" target="_blank">播放</a></td>
+       <td><a href="/file/${item}" target="_blank">播放</a></td>
    </tr>
 
 

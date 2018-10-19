@@ -14,8 +14,8 @@
     <tbody>
    <tr>
        <td>1</td>
-       <td>${code}</td>
-       <td>${msg}</td>
+       <td>${code?default("0000")}</td>
+       <td>${msg?default("没有出错信息")}</td>
        <td>error</td>
    </tr>
 

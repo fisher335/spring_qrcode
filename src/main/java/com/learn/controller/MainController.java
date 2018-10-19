@@ -99,9 +99,9 @@ public class MainController {
 
     @RequestMapping(value = "/list")
     public String list_header(HttpServletRequest request, Model map) {
-        Enumeration l = request.getHeaderNames();
+        Enumeration headerList = request.getHeaderNames();
         Map map_tmp = new HashMap<String, String>();
-        for (Enumeration e = l; e.hasMoreElements(); ) {
+        for (Enumeration e = headerList; e.hasMoreElements(); ) {
             String name = e.nextElement().toString();
             String val = request.getHeader(name);
             map_tmp.put(name, val);

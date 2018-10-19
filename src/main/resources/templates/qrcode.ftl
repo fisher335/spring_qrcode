@@ -2,7 +2,7 @@
 <div class="container-fluid">
 
     <div class="text-center">
-        <img src="/${file}" class="center-block"/>
+        <img src="/qrcode/${file}" class="center-block"/>
     </div>
 
     <div class="jumbotron text-center">
