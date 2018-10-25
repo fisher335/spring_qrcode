@@ -16,6 +16,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public String errorHandler(Exception e,Model map){
         map.addAttribute("code","00000000");
+        System.out.println(e.fillInStackTrace());
         map.addAttribute("msg",e.getMessage());
         return "error.ftl";
     }

@@ -27,7 +27,7 @@ public class Qrcode {
 
 
     public String create_qrcode(String text) throws IOException {
-        String file_name = String.valueOf(Math.random()*1000000);
+        String file_name = String.valueOf(Math.random() * 1000000);
         int width = 300;
         int height = 300;
         String format = "png";
@@ -38,7 +38,7 @@ public class Qrcode {
         try {
             BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, width, height, hints);
             file_name = file_name + ".png";
-            String file_path = qrcode_path +File.separator+ file_name;
+            String file_path = qrcode_path + File.separator + file_name;
 
             Path file = new File(file_path).toPath();
             MatrixToImageWriter.writeToPath(bitMatrix, format, file);
@@ -61,7 +61,7 @@ public class Qrcode {
         OutputStream os = null;
         try {
             os = res.getOutputStream();
-            bis = new BufferedInputStream(new FileInputStream(new File( qrcode_path+File.separator+ file_name
+            bis = new BufferedInputStream(new FileInputStream(new File(qrcode_path + File.separator + file_name
             )));
             int i = bis.read(buff);
             while (i != -1) {
@@ -81,4 +81,5 @@ public class Qrcode {
             }
         }
     }
+
 }
