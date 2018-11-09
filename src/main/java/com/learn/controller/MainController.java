@@ -3,15 +3,21 @@ package com.learn.controller;
 import cn.hutool.Hutool;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.io.file.FileReader;
 import cn.hutool.core.io.file.LineSeparator;
 import cn.hutool.core.util.NetUtil;
 import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSON;
+import cn.hutool.json.JSONUtil;
 import com.learn.util.FileUpload;
 import com.learn.util.Qrcode;
+import com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations.PrivateKeyResolver;
 import org.apache.bcel.generic.NEW;
 import org.apache.bcel.generic.RETURN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +27,7 @@ import javax.print.attribute.standard.PrinterLocation;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
@@ -37,6 +44,8 @@ public class MainController {
     private Qrcode qrcode;
     @Autowired
     private FileUpload fileupload;
+    @Autowired
+    private JavaMailSender mail;
 
     @Value("${web.file-path}")
     private String upload_path;
@@ -127,38 +136,14 @@ public class MainController {
     @RequestMapping (value = "/test")
     public String get_folder(HttpServletRequest request, Model map) {
 
-        HashMap<String, String> a = new HashMap<>();
-        a.put("name", "fengshaomin");
-        for (Map.Entry<String, String> one : a.entrySet()) {
 
-            System.out.println(one.getKey()+one.getValue());
-
-        }
-
-        a.forEach((k,v)->{System.out.println(k+v);});
-
-        ArrayList<String> l = new ArrayList<>();
-        l.add("fengshaomin");
-        l.add("shaomin");
-        l.add("haha");
-        l.add("haha");
-
-
-
-        System.out.println(l);
-
-        System.out.println("--------------------------------------------------------------");
-
-        HashSet s = new HashSet();
-
-        s.addAll(l);
-
-        System.out.println(s);
-        l.forEach(item->{System.out.println(item);});
-        List<String> li = FileUtil.listFileNames(upload_path);
-
-        String ip = NetUtil.getLocalhost().getHostAddress();
-        return Convert.toStr(ip);
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("fengshaomin@bjsasc.com");
+        message.setTo("fengshaomin@bjsasc.com");
+        message.setSubject("test");
+        message.setText("hello mail");
+        mail.send(message);
+        return "1";
 
     }
 
