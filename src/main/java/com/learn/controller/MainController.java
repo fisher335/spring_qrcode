@@ -1,36 +1,25 @@
 package com.learn.controller;
 
-import cn.hutool.Hutool;
-import cn.hutool.core.convert.Convert;
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.io.file.FileReader;
-import cn.hutool.core.io.file.LineSeparator;
-import cn.hutool.core.util.NetUtil;
 import cn.hutool.http.HttpUtil;
-import cn.hutool.json.JSON;
-import cn.hutool.json.JSONUtil;
 import com.learn.util.FileUpload;
 import com.learn.util.Qrcode;
-import com.sun.org.apache.xml.internal.security.keys.keyresolver.implementations.PrivateKeyResolver;
-import org.apache.bcel.generic.NEW;
-import org.apache.bcel.generic.RETURN;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.print.attribute.standard.PrinterLocation;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.*;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 /**
@@ -133,17 +122,13 @@ public class MainController {
     }
 
     @ResponseBody
-    @RequestMapping (value = "/test")
+    @RequestMapping(value = "/test")
     public String get_folder(HttpServletRequest request, Model map) {
 
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("fengshaomin@bjsasc.com");
-        message.setTo("fengshaomin@bjsasc.com");
-        message.setSubject("test");
-        message.setText("hello mail");
-        mail.send(message);
-        return "1";
+        String s = HttpUtil.get("http://web.bjsasc.com");
+
+        return s;
 
     }
 

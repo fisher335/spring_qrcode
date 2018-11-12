@@ -18,9 +18,10 @@ public class MyAppFileConfig implements WebMvcConfigurer {
     private String file_path;
     @Value("${web.qrcode-path}")
     private String qrcode_path;
+
     @Override
-    public   void   addResourceHandlers (ResourceHandlerRegistry registry){
-        registry.addResourceHandler("/file/**").addResourceLocations("file:"+file_path);
-        registry.addResourceHandler("/qrcode/**").addResourceLocations("file:"+qrcode_path);
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/file/**").addResourceLocations("file:" + file_path);
+        registry.addResourceHandler("/qrcode/**").addResourceLocations("file:" + qrcode_path);
     }
 }

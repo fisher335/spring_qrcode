@@ -1,4 +1,5 @@
 package com.learn.config;
+
 import cn.org.rapid_framework.freemarker.directive.BlockDirective;
 import cn.org.rapid_framework.freemarker.directive.ExtendsDirective;
 import cn.org.rapid_framework.freemarker.directive.OverrideDirective;
@@ -17,7 +18,7 @@ public class FreemarkerConfig {
     freemarker.template.Configuration configuration;
 
     @PostConstruct
-    public void setSharedVariable(){
+    public void setSharedVariable() {
         configuration.setSharedVariable("block", new BlockDirective());
         configuration.setSharedVariable("override", new OverrideDirective());
         configuration.setSharedVariable("extends", new ExtendsDirective());
