@@ -1,5 +1,7 @@
 package com.learn.util;
 
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.log.StaticLog;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -28,23 +30,10 @@ public class FileUpload {
     public List<String> get_filelist(boolean isAddDirectory) {
 
         String directoryPath = upload_path;
-        List<String> list = new ArrayList<String>();
-        File baseFile = new File(directoryPath);
-        if (baseFile.isFile() || !baseFile.exists()) {
-            return list;
-        }
-        File[] files = baseFile.listFiles();
-        for (File file : files) {
-            if (file.isDirectory()) {
-                if (isAddDirectory) {
-                    list.add(file.getAbsolutePath());
-                }
-                list.addAll(get_filelist(isAddDirectory));
-            } else {
-                list.add(file.getName());
-            }
-        }
-        return list;
+
+        List<String> ls = FileUtil.listFileNames(directoryPath);
+//        StaticLog.info(ls.toString());
+        return ls;
     }
 
     // 过滤特殊字符 p
