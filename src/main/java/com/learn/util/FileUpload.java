@@ -21,6 +21,10 @@ public class FileUpload {
 
     public void save_upload_file(byte[] file, String file_name) throws IOException {
 
+        if(!FileUtil.isDirectory(upload_path)){
+            FileUtil.mkdir(upload_path);
+        }
+
         FileOutputStream out = new FileOutputStream(upload_path + File.separator + file_name);
         out.write(file);
         out.flush();

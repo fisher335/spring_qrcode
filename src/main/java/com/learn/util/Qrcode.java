@@ -1,5 +1,6 @@
 package com.learn.util;
 
+import cn.hutool.core.io.FileUtil;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
@@ -27,6 +28,10 @@ public class Qrcode {
 
 
     public String create_qrcode(String text) throws IOException {
+
+        if(!FileUtil.isDirectory(qrcode_path)){
+            FileUtil.mkdir(qrcode_path);
+        }
         String file_name = String.valueOf(Math.random() * 1000000);
         int width = 300;
         int height = 300;
