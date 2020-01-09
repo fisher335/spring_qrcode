@@ -1,6 +1,5 @@
 package com.learn.controller;
 
-import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
 import com.learn.util.FileUpload;
 import com.learn.util.Qrcode;
