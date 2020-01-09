@@ -34,14 +34,17 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/list/">请求头</a>
                 </li>
-            <#--<li class="nav-item">-->
-            <#--<a class="nav-link" href="/wiki/">wiki</a>-->
-            <#--</li>-->
+            <li class="nav-item">
+            <a class="nav-link" href="/wiki/">wiki</a>
+            </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/upload/">上传文件</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/file/">文件列表</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ocr/">文字识别</a>
                 </li>
             </ul>
         </div>

@@ -1,5 +1,6 @@
 package com.learn.controller;
 
+import cn.hutool.http.HttpResponse;
 import cn.hutool.http.HttpUtil;
 import com.learn.util.FileUpload;
 import com.learn.util.Qrcode;
@@ -116,6 +117,7 @@ public class MainController {
             String val = request.getHeader(name);
             map_tmp.put(name, val);
         }
+        map_tmp.put("ip",request.getRemoteAddr());
         map.addAttribute("headers", map_tmp);
         return "list";
 
@@ -131,5 +133,7 @@ public class MainController {
         return s;
 
     }
+
+
 
 }
