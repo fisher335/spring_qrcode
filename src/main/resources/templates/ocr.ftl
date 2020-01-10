@@ -23,7 +23,7 @@
 <div class="container-fluid" align="center">
 
         识别结果：<br>
-        ${ocr?default("")}
+        ${ocr!?default("")}
 
 </div>
 
