@@ -20,7 +20,7 @@
 
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" align="center">
 
         识别结果：<br>
         ${ocr?default("")}
