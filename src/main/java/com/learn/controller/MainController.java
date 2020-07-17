@@ -33,8 +33,6 @@ public class MainController {
     private Qrcode qrcode;
     @Autowired
     private FileUpload fileupload;
-    @Autowired
-    private JavaMailSender mail;
 
     @Value("${web.file-path}")
     private String upload_path;

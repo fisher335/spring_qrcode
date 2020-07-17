@@ -8,15 +8,17 @@ import com.learn.util.OcrUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.lang.model.element.NestingKind;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class AppendController {
@@ -63,5 +65,25 @@ public class AppendController {
         map.addAttribute("ocr", result_ocr);
 
         return "ocr";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/es")
+    public Map<String,String> cription(@RequestParam("un")  String un, @RequestParam("pd")  String pd  ) throws IOException {
+
+        String auth = String.format("%s:%s",un,pd);
+        String auth1 = baseCry(auth);
+
+        String headerAuth = "Authorization: Basic "+auth1;
+        String authString = baseCry(headerAuth);
+        Map<String,String> rst = new HashMap<>();
+        rst.put("header", headerAuth);
+        rst.put("stringAuth",authString);
+        return rst;
+    }
+
+    public String baseCry(String s) throws UnsupportedEncodingException {
+        String r = new String(Base64.getEncoder().encode(s.getBytes("utf-8")),"utf-8");
+        return r;
     }
 }
