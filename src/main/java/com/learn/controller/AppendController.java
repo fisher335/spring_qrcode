@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.lang.model.element.NestingKind;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -20,6 +19,9 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author Administrator
+ */
 @Controller
 public class AppendController {
 
@@ -32,58 +34,52 @@ public class AppendController {
     @Autowired
     private OcrUtil ocrUtil;
 
-
     @RequestMapping(value = "/wiki/")
-    public void get_wiki() throws IOException {
+    public void getWiki() throws IOException {
 
         myHttpResponse.sendRedirect("http://www.baidu.com");
     }
 
 
     @GetMapping(value = "/ocr")
-    public String get_ocr() {
+    public String getOcr() {
         return "ocr";
     }
 
     @PostMapping(value = "/ocr/")
-    public String post_ocr(@RequestParam("file") MultipartFile file, Model map) throws IOException {
-
-
+    public String postOcr(@RequestParam("file") MultipartFile file, Model map) throws IOException {
         String result = ocrUtil.getOcr(file.getBytes());
-
         JSONObject js = JSONUtil.parseObj(result);
         StaticLog.info(js.toString());
-
         JSONArray jsarray = js.getJSONArray("words_result");
-
-        String result_ocr = "";
+        StringBuffer resultOcr = new StringBuffer();
         for (int i = 0; i < jsarray.size(); i++) {
-            JSONObject js_word = JSONUtil.parseObj( jsarray.get(i));
+            JSONObject jsWord = JSONUtil.parseObj(jsarray.get(i));
 
-            result_ocr = result_ocr + js_word.get("words")+"<br>";
+            resultOcr = resultOcr.append(jsWord.get("words") + "<br>");
         }
-        map.addAttribute("ocr", result_ocr);
-
+        map.addAttribute("ocr", resultOcr.toString());
         return "ocr";
     }
 
     @ResponseBody
     @RequestMapping(value = "/es")
-    public Map<String,String> cription(@RequestParam("un")  String un, @RequestParam("pd")  String pd  ) throws IOException {
+    public Map<String, String> cryption(@RequestParam Map<String, Object> params) throws IOException {
 
-        String auth = String.format("%s:%s",un,pd);
+        String un = params.get("un").toString();
+        String pd = params.get("pd").toString();
+        String auth = String.format("%s:%s", un, pd);
         String auth1 = baseCry(auth);
-
-        String headerAuth = "Authorization: Basic "+auth1;
+        String headerAuth = "Authorization: Basic " + auth1;
         String authString = baseCry(headerAuth);
-        Map<String,String> rst = new HashMap<>();
+        Map<String, String> rst = new HashMap<>(4);
         rst.put("header", headerAuth);
-        rst.put("stringAuth",authString);
+        rst.put("stringAuth", authString);
         return rst;
     }
 
     public String baseCry(String s) throws UnsupportedEncodingException {
-        String r = new String(Base64.getEncoder().encode(s.getBytes("utf-8")),"utf-8");
+        String r = new String(Base64.getEncoder().encode(s.getBytes("utf-8")), "utf-8");
         return r;
     }
 }

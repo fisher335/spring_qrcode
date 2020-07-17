@@ -19,7 +19,7 @@ public class FileUpload {
     @Value("${web.file-path}")
     private String upload_path;
 
-    public void save_upload_file(byte[] file, String file_name) throws IOException {
+    public void saveUploadFile(byte[] file, String file_name) throws IOException {
 
         if(!FileUtil.isDirectory(upload_path)){
             FileUtil.mkdir(upload_path);

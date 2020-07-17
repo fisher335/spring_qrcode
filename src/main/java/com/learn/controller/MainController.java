@@ -5,7 +5,6 @@ import com.learn.util.FileUpload;
 import com.learn.util.Qrcode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,9 @@ import java.util.Map;
 import java.util.logging.Logger;
 
 /**
- * Created by fengshaomin on 2018/7/20 0020.
+ *
+ * @author fengshaomin
+ * @date 2018/7/20 0020
  */
 
 @Controller
@@ -35,7 +36,7 @@ public class MainController {
     private FileUpload fileupload;
 
     @Value("${web.file-path}")
-    private String upload_path;
+    private String uploadPath;
 
     private Logger logger = Logger.getLogger(getClass().toString());
 
@@ -50,7 +51,7 @@ public class MainController {
     }
 
     @GetMapping(value = "/qrcode")
-    public String Qrcode() {
+    public String qrcode() {
         return "index";
     }
 
@@ -60,37 +61,37 @@ public class MainController {
 
         String url = request.getParameter("url");
 
-        String fire_name = qrcode.create_qrcode(url);
+        String fileName = qrcode.create_qrcode(url);
 
-        map.addAttribute("file", fire_name);
+        map.addAttribute("file", fileName);
         return "qrcode";
     }
 
     @RequestMapping(value = "/download/{file_name}")
-    public void download_img(@PathVariable("file_name") String file_name, HttpServletResponse res) throws UnsupportedEncodingException {
-        qrcode.download(res, file_name);
+    public void downloadImg(@PathVariable("file_name") String fileName, HttpServletResponse res) throws UnsupportedEncodingException {
+        qrcode.download(res, fileName);
     }
 
     @GetMapping(value = "/upload")
-    public String upload_file_get() {
+    public String uploadFileGet() {
         return "upload";
     }
 
     @PostMapping(value = "/upload")
-    public String upload_file_post(@RequestParam("file") MultipartFile file) throws IOException {
+    public String uploadFilePost(@RequestParam("file") MultipartFile file) throws IOException {
 
-        String file_name = file.getOriginalFilename();
-        File tmp_file = new File(file_name);
-        String real_name = tmp_file.getName();
-        logger.info("upload file -----------------------" + real_name);
-        fileupload.save_upload_file(file.getBytes(), real_name);
+        String fileName = file.getOriginalFilename();
+        File tmpFile = new File(fileName);
+        String realName = tmpFile.getName();
+        logger.info("upload file -----------------------" + realName);
+        fileupload.saveUploadFile(file.getBytes(), realName);
 
 
         return "redirect:/file";
     }
 
     @RequestMapping(value = "/file")
-    public String list_file(Model map) {
+    public String listFile(Model map) {
 
         List<String> result = fileupload.get_filelist(false);
         map.addAttribute("file", result);
@@ -106,31 +107,24 @@ public class MainController {
     }
 
     @RequestMapping(value = "/list")
-    public String list_header(HttpServletRequest request, Model map) {
+    public String listHeader(HttpServletRequest request, Model map) {
         Enumeration headerList = request.getHeaderNames();
-        Map map_tmp = new HashMap<String, String>();
+        Map tmpMap = new HashMap<String, String>(16);
         for (Enumeration e = headerList; e.hasMoreElements(); ) {
             String name = e.nextElement().toString();
             String val = request.getHeader(name);
-            map_tmp.put(name, val);
+            tmpMap.put(name, val);
         }
-        map_tmp.put("ip",request.getRemoteAddr());
-        map.addAttribute("headers", map_tmp);
+        tmpMap.put("ip",request.getRemoteAddr());
+        map.addAttribute("headers", tmpMap);
         return "list";
 
     }
 
     @ResponseBody
     @RequestMapping(value = "/test")
-    public String get_folder(HttpServletRequest request, Model map) {
-
-
+    public String getFolder(HttpServletRequest request, Model map) {
         String s = HttpUtil.get("http://web.bjsasc.com");
-
         return s;
-
     }
-
-
-
 }
