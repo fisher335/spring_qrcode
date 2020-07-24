@@ -55,7 +55,6 @@ public class AppendController {
         StringBuffer resultOcr = new StringBuffer();
         for (int i = 0; i < jsarray.size(); i++) {
             JSONObject jsWord = JSONUtil.parseObj(jsarray.get(i));
-
             resultOcr = resultOcr.append(jsWord.get("words") + "<br>");
         }
         map.addAttribute("ocr", resultOcr.toString());
