@@ -61,18 +61,18 @@ public class Qrcode {
         res.setContentType("application/octet-stream");
         res.setHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(file_name, "UTF-8"));
 
-        byte[] buff = new byte[1024];
+
         BufferedInputStream bis = null;
         OutputStream os = null;
         try {
             os = res.getOutputStream();
-            bis = new BufferedInputStream(new FileInputStream(new File(qrcode_path + File.separator + file_name
-            )));
-            int i = bis.read(buff);
-            while (i != -1) {
-                os.write(buff, 0, buff.length);
+            bis = new BufferedInputStream(new FileInputStream(qrcode_path + File.separator + file_name
+            ));
+            int start;
+            byte[] buff = new byte[1024];
+            while ((start=bis.read(buff)) != -1) {
+                os.write(buff, 0, start);
                 os.flush();
-                i = bis.read(buff);
             }
         } catch (IOException e) {
             e.printStackTrace();
