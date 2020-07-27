@@ -26,18 +26,12 @@ import java.util.Map;
 public class AppendController {
 
     @Autowired
-    private HttpServletRequest myHttpRequest;
-
-    @Autowired
-    private HttpServletResponse myHttpResponse;
-
-    @Autowired
     private OcrUtil ocrUtil;
 
     @RequestMapping(value = "/wiki/")
-    public void getWiki() throws IOException {
+    public void getWiki(HttpServletResponse response) throws IOException {
 
-        myHttpResponse.sendRedirect("http://www.baidu.com");
+        response.sendRedirect("http://www.baidu.com");
     }
 
 
