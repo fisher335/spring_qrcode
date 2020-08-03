@@ -24,7 +24,6 @@ public class FileUpload {
         if(!FileUtil.isDirectory(upload_path)){
             FileUtil.mkdir(upload_path);
         }
-
         FileOutputStream out = new FileOutputStream(upload_path + File.separator + file_name);
         out.write(file);
         out.flush();
@@ -34,20 +33,18 @@ public class FileUpload {
     public List<String> get_filelist(boolean isAddDirectory) {
 
         String directoryPath = upload_path;
-
         List<String> ls = FileUtil.listFileNames(directoryPath);
 //        StaticLog.info(ls.toString());
         return ls;
     }
 
     // 过滤特殊字符 p
-// 只允许字母和数字 // String regEx ="[^a-zA-Z0-9]";
-// 清除掉所有特殊字符
+    // 只允许字母和数字 // String regEx ="[^a-zA-Z0-9]";
+    // 清除掉所有特殊字符
     public static String StringFilter(String str) throws PatternSyntaxException {
         String regEx = "[`~!@#$%^&*()+=|{}':;',\\[\\].<>/?~！@#￥%……&*（）——+|{}【】‘；：”“’。，、？]";
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(str);
         return m.replaceAll("").trim();
     }
-
 }
