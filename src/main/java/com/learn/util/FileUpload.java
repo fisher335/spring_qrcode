@@ -16,7 +16,7 @@ import java.util.regex.PatternSyntaxException;
 
 @Component
 public class FileUpload {
-    @Value("${web.file-path}")
+    @Value("${web.file-path:./file}")
     private String upload_path;
 
     public void saveUploadFile(byte[] file, String file_name) throws IOException {

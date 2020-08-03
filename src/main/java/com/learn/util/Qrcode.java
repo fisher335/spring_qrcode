@@ -23,7 +23,7 @@ import java.util.Hashtable;
 @Component
 public class Qrcode {
 
-    @Value("${web.qrcode-path}")
+    @Value("${web.qrcode-path:./qrcode}")
     private String qrcode_path;
 
 
