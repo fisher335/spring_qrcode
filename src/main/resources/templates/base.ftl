@@ -53,9 +53,19 @@
 <div class="panel-body">
 <@block name="body">base_body_content</@block>
 </div>
+<style type="text/css">
+    .div_foot {
 
 
+
+        height: 50px;
+
+        text-align: center;
+        position:fixed; bottom:0px; left:0px;
+        line-height: 50px;
+        width: 100%;}
+</style>
 </body>
-
+<div class="div_foot"> 蜀ICP备2021025507号</div>
 
 </html>
