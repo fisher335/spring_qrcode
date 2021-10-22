@@ -55,11 +55,7 @@
 </div>
 <style type="text/css">
     .div_foot {
-
-
-
         height: 50px;
-
         text-align: center;
         position:fixed; bottom:0px; left:0px;
         line-height: 50px;
