@@ -15,7 +15,7 @@
 
     <nav class="navbar navbar-expand-md bg-dark navbar-dark">
         <!-- Brand -->
-        <a class="navbar-brand" href="#">网盘测试</a>
+        <a class="navbar-brand" href="#">文件暂存</a>
 
         <!-- Toggler/collapsibe Button -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
